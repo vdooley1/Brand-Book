@@ -1,69 +1,65 @@
 # Success Center — descriptors & subheaders
 
-Drop-in code that adds two things to the Jasper Success Center (Zendesk Guide,
-Artera theme):
+Adds supporting copy to the Jasper Success Center (Zendesk Guide, Artera theme):
 
-- **Descriptors** — a short line of supporting copy under a card or page title
-  ("Hands-on how-to sessions with our Customer Success team").
-- **Subheaders** — a supporting line under a section heading
-  ("Live sessions, product stories, and the latest from our team").
+- **Subheaders** — a line under a heading ("Everything you need to get set up,
+  get comfortable, and get the most out of Jasper").
+- **Descriptors** — a line under a card title ("Hands-on how-to sessions with
+  our Customer Success team").
 
-Everything is namespaced `jsc-` and additive. Nothing here overrides an
-existing Artera rule, so it survives a theme update — you re-apply the patches
-rather than re-merging a fork.
+`templates/home_page.hbs` is a **complete, ready-to-paste replacement** for the
+theme's `home_page.hbs`, generated from the live file you supplied.
+`home_page.original.hbs` is that live file, unmodified, so you can diff the two.
 
-## Two ways to install
+## Install
 
-Pick one. They're independent, and they can also run together (the JS skips any
-card that already has a descriptor, so it won't double up on cards the
-templates already handle).
+1. Replace the theme's `templates/home_page.hbs` with `templates/home_page.hbs`.
+2. Append `styles/descriptors.css` to the end of the theme's `style.css`.
+3. Merge the object in `manifest-settings.json` into the `settings` array in the
+   theme's `manifest.json`.
+4. Zip and import as a new theme. Preview before publishing.
 
-| | Path A — templates | Path B — script |
+Nothing renders until you fill in the settings, and every new element is
+conditional — so step 1 alone changes the page in exactly one way (see "Bug
+fixed" below). It's safe to ship the template first and write the copy after.
+
+## What changed in home_page.hbs
+
+27 edits. Diff against `home_page.original.hbs` to see them all.
+
+**Two new subheaders**
+
+| Where | Setting | Class |
 |---|---|---|
-| Edit `.hbs` files | Yes | No |
-| Renders | Server-side, no flash | After page load |
-| Copy lives in | Guide descriptions + theme settings | The `CONFIG` block in the JS |
-| Best for | The permanent version | Cards with no Zendesk record behind them; a fast pilot |
+| Under the hero H1, above the search box | `homepage_welcome_subtitle` | `.hero-subtitle` |
+| Under the Things to Know section title | `things_to_know_subtitle` | `.section-subtitle` |
 
-**Recommendation:** Path A for the category and section cards, Path B for the
-"More Resources" style cards if you don't want to add theme settings yet.
+**Descriptor overrides** — 14 new settings (`category_1..4_description`,
+`card_1..10_description`). Each card now resolves its descriptor in this order:
 
-## Path A — templates
+1. the theme setting, if set — lets you write home-page-specific copy
+2. otherwise the category/section description from Guide
+3. otherwise nothing is rendered at all
 
-1. Download the live theme (Guide admin → **Customize design** → your theme →
-   ⋯ → **Download theme**) and unzip it.
-2. Append `styles/descriptors.css` to the end of `style.css`.
-3. Open `templates/home_page.hbs`, `category_page.hbs` and `section_page.hbs`
-   in this repo. Each is a set of commented **snippets**, not a replacement
-   file — every snippet says exactly where in Artera's file it goes.
-4. Merge the group in `manifest-settings.json` into the `settings` array in the
-   theme's `manifest.json`. Only needed for the snippets that reference
-   `settings.*`; skip it if you're only using the Guide description fields.
-5. Zip the theme folder (zip the *contents*, not the enclosing folder) and
-   import it as a new theme. Preview before publishing.
+That third step matters: the original template printed
+`<p class="card-description">{{excerpt description}}</p>` unconditionally, so
+every card whose category has no description in Guide emitted an empty
+paragraph and paid for its margin. Same for `contact_subtitle`, which rendered
+an empty `<p>` whenever it was unset. Those are now wrapped in `{{#if}}`.
 
-The category and section descriptors read Zendesk's built-in `description`
-field, so the content team edits them in **Guide → Arrange content → edit
-category/section** — no theme deploy per copy change.
+**Bug fixed** — category card 1 in the featured-categories block was missing its
+`<span class="blocks-item-description">` entirely; cards 2, 3 and 4 had it. So
+"Get Started" could never show a descriptor no matter what you typed in Guide.
+Card 1 now matches the other three. This is the one change that alters the page
+without you configuring anything — and only if that category has a description
+in Guide.
 
-## Path B — script
+## Where the copy lives
 
-1. Append `styles/descriptors.css` to the end of `style.css`.
-2. Append `scripts/descriptors.js` to the end of `script.js`.
-3. Edit the `CONFIG` block at the top of the script: `subheaders` is keyed on
-   the exact heading text, `manualDescriptors` on the exact card title text.
-   Both are matched case-insensitively with whitespace collapsed.
-4. Import and preview.
-
-`useApiDescriptions: true` makes the script read real category and section
-descriptions from `/api/v2/help_center/{locale}/{categories,sections}.json` and
-match them to cards by the record ID in each card's href. That means Path B
-also picks up copy the content team writes in Guide. An entry in
-`manualDescriptors` wins over the API value for the same card, so you can
-override a description on the home page without changing it in Guide.
-
-If the API call fails the script logs a warning and the page renders exactly as
-it does today.
+Guide descriptions are the better home for this: **Guide → Arrange content →
+edit category/section**, no theme deploy per copy change, and the same text
+then shows on the category and section pages too. Use the `*_description`
+settings only when the home page needs to say something different.
 
 ## Testing
 
@@ -72,40 +68,56 @@ npm install
 npm test
 ```
 
-Runs `scripts/descriptors.js` against a mock Artera-shaped DOM with a stubbed
-Help Center API and asserts 14 behaviours: subheader placement, manual copy
-winning over API copy, cards that already have a description being left alone,
-empty descriptions being dropped, and nav links being skipped.
+`test/home_page.test.js` compiles the template with real Handlebars (with
+stand-ins for the `is` and `excerpt` Curlybars helpers) and renders it against
+mock Guide data — 16 assertions covering both subheaders, setting-overrides-win,
+Guide-description fallback, empty descriptions producing no element, and a
+render with zero settings configured.
 
-## Classes
+The assertions worth knowing about are the `../../` ones. Each Things to Know
+card has two branches: a category branch nested one `{{#each}}` deep, and a
+section branch nested two deep (`{{#each categories}}{{#each sections}}`). A
+settings lookup needs `../` in the first and `../../` in the second — get it
+wrong and the descriptor silently renders blank rather than erroring. The test
+exercises both branches for exactly this reason.
 
-| Class | Use |
-|---|---|
-| `.jsc-descriptor` | Base descriptor styling |
-| `.jsc-descriptor--card` | On a card; clamps to 3 lines (2 on mobile) |
-| `.jsc-descriptor--page` | Under an H1; full text, larger |
-| `.jsc-descriptor--list` | Compact, for list rows |
-| `.jsc-subheader` | Supporting line under a section heading |
-| `.jsc-subheader--centered` / `--left` | Alignment |
-| `.jsc-has-subheader` | Added to the heading above a subheader; removes its bottom margin |
+`test/descriptors.test.js` covers the optional script (below).
 
-Sizes, colours and the line clamp are CSS custom properties on `:root` at the
-top of `descriptors.css` — change them there rather than editing rules.
+## Regenerating after an Artera update
 
-## Notes
+```
+# replace templates/home_page.original.hbs with the new upstream file
+node tools/transform.js && npm test
+```
 
-- Zendesk stores category/section descriptions as **plain text**. The templates
-  use `{{description}}` (escaped) and the script uses `textContent`, both of
-  which are correct and safe. Don't switch to `{{{description}}}`.
-- Descriptors inside a card link become part of that link's accessible name.
-  That reads fine for one short line; if a description runs long, use the
-  Path A markup and place the descriptor *outside* the `<a>`.
-- If adding descriptors makes cards in a row uneven, uncomment section 3 of
-  `descriptors.css` and swap `.blocks-item` for Artera's actual card class.
-- **Artera's real class names.** Artera's card and heading classes vary by
-  version, so the snippets show Artera-*shaped* markup (`blocks-item`,
-  `blocks-item-title`, `page-header-title`) as a guide — check the theme's
-  actual files and match what's there. The CSS and the script don't depend on
-  those names: the CSS only styles `jsc-` classes, and the script finds cards
-  structurally (a link to `/categories/` or `/sections/`, then the nearest
-  card-like ancestor containing a heading).
+`tools/transform.js` applies all 27 edits by pattern, so you re-run it rather
+than re-merging by hand. It derives each card's `../` depth from the
+neighbouring `settings.card_N_image` reference, so it stays correct even if
+Artera reorders or adds cards.
+
+## The other files
+
+`templates/category_page.hbs` and `templates/section_page.hbs` are **snippets,
+not full files** — I don't have those two files from your theme. They show
+where to print `category.description` and `section.description` so descriptors
+carry through to the inner pages. Send me those files and I'll convert them the
+same way as the home page.
+
+`scripts/descriptors.js` is an optional no-template path: it reads descriptions
+from the Help Center API and injects them client-side. With the template
+installed you don't need it for the home page — it's there for the category and
+section pages until those are converted. It skips any card or heading that
+already shows copy, so it won't double up on what the template renders.
+
+## Not included
+
+The mockup shows a second card grid ("More Resources": Live Training, Courses,
+Customer Stories, Blog) that doesn't exist in the current template — those four
+aren't Zendesk categories, so they'd need their own settings-driven block
+rather than descriptors on existing cards. That's a separate change from
+descriptors and subheaders; say the word and I'll add it.
+
+One thing I'd flag: the Things to Know section is ~600 of the template's 624
+lines, because 10 cards × 2 branches are spelled out longhand. It works, and I
+left the structure alone deliberately, but it could collapse to a single loop
+over a card list. Worth doing if you ever need an 11th card.

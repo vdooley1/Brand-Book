@@ -1,12 +1,14 @@
 {
   "name": "jsc-descriptors",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
   "description": "Descriptors & subheaders for the Jasper Success Center (Zendesk Guide / Artera theme)",
   "scripts": {
-    "test": "node test/descriptors.test.js"
+    "test": "node test/home_page.test.js && node test/descriptors.test.js",
+    "build": "node tools/transform.js"
   },
   "devDependencies": {
+    "handlebars": "^4.7.8",
     "jsdom": "^24.0.0"
   }
 }

@@ -184,10 +184,19 @@
     return true;
   }
 
-  function addSubheader(heading, text) {
-    if (!text) return false;
+  // The theme may already render a subheader under this heading — either ours
+  // from a previous run, or a template-rendered one (`section-subtitle`,
+  // `hero-subtitle`, `contact-subtitle`). Don't stack a second one on top.
+  function alreadySubheaded(heading) {
     var next = heading.nextElementSibling;
-    if (next && next.classList && next.classList.contains(SUBHEADER_CLASS)) return false;
+    if (!next) return false;
+    if (next.classList && next.classList.contains(SUBHEADER_CLASS)) return true;
+    var cls = typeof next.className === 'string' ? next.className : '';
+    return /subtitle|subhead|description|tagline/i.test(cls) && !!norm(next.textContent);
+  }
+
+  function addSubheader(heading, text) {
+    if (!text || alreadySubheaded(heading)) return false;
 
     var centered =
       window.getComputedStyle(heading).textAlign === 'center' ? ' ' + SUBHEADER_CLASS + '--centered' : '';

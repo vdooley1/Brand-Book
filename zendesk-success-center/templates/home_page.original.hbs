@@ -2,9 +2,6 @@
 <section class="hero hero-image"{{#if settings.homepage_background_image}} style="background-image: url('{{settings.homepage_background_image}}');"{{/if}}>
     <div class="hero-inner">
       <h1 class="welcome-message" style="margin: 0; padding: 25px;">{{#if settings.homepage_welcome_message}}{{settings.homepage_welcome_message}}{{else}}{{help_center.name}}{{/if}}</h1>
-      {{#if settings.homepage_welcome_subtitle}}
-        <p class="hero-subtitle">{{settings.homepage_welcome_subtitle}}</p>
-      {{/if}}
       <form role="search" class="search-full" data-search="" data-instant="true" autocomplete="off" action="/hc/en-us/search" accept-charset="UTF-8" method="get" style="display: block;"><input name="utf8" type="hidden" value="✓" autocomplete="off"><input type="search" name="query" id="query" placeholder="Start typing your question..." autocomplete="off" aria-label="Search">
 			</form>
       <span id="search_placeholder_text" data-value="Start typing your question..." style="display:none;"></span>
@@ -28,13 +25,6 @@
                           <img src="{{../settings.category_image_1}}" alt="{{name}}" class="blocks-item-image">
                         {{/if}}
                         <span class="blocks-item-title">{{name}}</span>
-                        {{#if ../settings.category_1_description}}
-                          <span class="blocks-item-description">{{../settings.category_1_description}}</span>
-                        {{else}}
-                          {{#if description}}
-                            <span class="blocks-item-description">{{excerpt description}}</span>
-                          {{/if}}
-                        {{/if}}
                       </a>
                     </li>
                   {{/is}}
@@ -47,13 +37,7 @@
                           <img src="{{../settings.category_image_2}}" alt="{{name}}" class="blocks-item-image">
                         {{/if}}
                         <span class="blocks-item-title">{{name}}</span>
-                        {{#if ../settings.category_2_description}}
-                          <span class="blocks-item-description">{{../settings.category_2_description}}</span>
-                        {{else}}
-                          {{#if description}}
-                            <span class="blocks-item-description">{{excerpt description}}</span>
-                          {{/if}}
-                        {{/if}}
+                        <span class="blocks-item-description">{{excerpt description}}</span>
                       </a>
                     </li>
                   {{/is}}
@@ -66,13 +50,7 @@
                           <img src="{{../settings.category_image_3}}" alt="{{name}}" class="blocks-item-image">
                         {{/if}}
                         <span class="blocks-item-title">{{name}}</span>
-                        {{#if ../settings.category_3_description}}
-                          <span class="blocks-item-description">{{../settings.category_3_description}}</span>
-                        {{else}}
-                          {{#if description}}
-                            <span class="blocks-item-description">{{excerpt description}}</span>
-                          {{/if}}
-                        {{/if}}
+                        <span class="blocks-item-description">{{excerpt description}}</span>
                       </a>
                     </li>
                   {{/is}}
@@ -85,13 +63,7 @@
                           <img src="{{../settings.category_image_4}}" alt="{{name}}" class="blocks-item-image">
                         {{/if}}
                         <span class="blocks-item-title">{{name}}</span>
-                        {{#if ../settings.category_4_description}}
-                          <span class="blocks-item-description">{{../settings.category_4_description}}</span>
-                        {{else}}
-                          {{#if description}}
-                            <span class="blocks-item-description">{{excerpt description}}</span>
-                          {{/if}}
-                        {{/if}}
+                        <span class="blocks-item-description">{{excerpt description}}</span>
                       </a>
                     </li>
                   {{/is}}
@@ -109,9 +81,6 @@
 <section class="things-to-know-section"{{#if settings.ttk_background_color}} style="background-color: {{settings.ttk_background_color}};"{{/if}}>
   <div class="container">
     <h2 class="section-title">{{settings.things_to_know_title}}</h2>
-    {{#if settings.things_to_know_subtitle}}
-      <p class="section-subtitle">{{settings.things_to_know_subtitle}}</p>
-    {{/if}}
     <div class="things-to-know-grid">
       {{! Card 1 }}
       {{#if settings.card_1_title}}
@@ -128,13 +97,7 @@
                     {{/if}}
                     <div class="card-text">
                       <h3 class="card-title">{{name}}</h3>
-                      {{#if ../settings.card_1_description}}
-                        <p class="card-description">{{../settings.card_1_description}}</p>
-                      {{else}}
-                        {{#if description}}
-                          <p class="card-description">{{excerpt description}}</p>
-                        {{/if}}
-                      {{/if}}
+                      <p class="card-description">{{excerpt description}}</p>
                     </div>
                   </div>
                   <a href="{{url}}" class="card-button">{{../settings.view_more_text}}</a>
@@ -156,13 +119,7 @@
                       {{/if}}
                       <div class="card-text">
                         <h3 class="card-title">{{name}}</h3>
-                        {{#if ../../settings.card_1_description}}
-                          <p class="card-description">{{../../settings.card_1_description}}</p>
-                        {{else}}
-                          {{#if description}}
-                            <p class="card-description">{{excerpt description}}</p>
-                          {{/if}}
-                        {{/if}}
+                        <p class="card-description">{{excerpt description}}</p>
                       </div>
                     </div>
                     <a href="{{url}}" class="card-button">{{../../settings.view_more_text}}</a>
@@ -189,13 +146,7 @@
                     {{/if}}
                     <div class="card-text">
                       <h3 class="card-title">{{name}}</h3>
-                      {{#if ../settings.card_2_description}}
-                        <p class="card-description">{{../settings.card_2_description}}</p>
-                      {{else}}
-                        {{#if description}}
-                          <p class="card-description">{{excerpt description}}</p>
-                        {{/if}}
-                      {{/if}}
+                      <p class="card-description">{{excerpt description}}</p>
                     </div>
                   </div>
                   <a href="{{url}}" class="card-button">{{../settings.view_more_text}}</a>
@@ -217,13 +168,7 @@
                       {{/if}}
                       <div class="card-text">
                         <h3 class="card-title">{{name}}</h3>
-                        {{#if ../../settings.card_2_description}}
-                          <p class="card-description">{{../../settings.card_2_description}}</p>
-                        {{else}}
-                          {{#if description}}
-                            <p class="card-description">{{excerpt description}}</p>
-                          {{/if}}
-                        {{/if}}
+                        <p class="card-description">{{excerpt description}}</p>
                       </div>
                     </div>
                     <a href="{{url}}" class="card-button">{{../../settings.view_more_text}}</a>
@@ -250,13 +195,7 @@
                     {{/if}}
                     <div class="card-text">
                       <h3 class="card-title">{{name}}</h3>
-                      {{#if ../settings.card_3_description}}
-                        <p class="card-description">{{../settings.card_3_description}}</p>
-                      {{else}}
-                        {{#if description}}
-                          <p class="card-description">{{excerpt description}}</p>
-                        {{/if}}
-                      {{/if}}
+                      <p class="card-description">{{excerpt description}}</p>
                     </div>
                   </div>
                   <a href="{{url}}" class="card-button">{{../settings.view_more_text}}</a>
@@ -278,13 +217,7 @@
                       {{/if}}
                       <div class="card-text">
                         <h3 class="card-title">{{name}}</h3>
-                        {{#if ../../settings.card_3_description}}
-                          <p class="card-description">{{../../settings.card_3_description}}</p>
-                        {{else}}
-                          {{#if description}}
-                            <p class="card-description">{{excerpt description}}</p>
-                          {{/if}}
-                        {{/if}}
+                        <p class="card-description">{{excerpt description}}</p>
                       </div>
                     </div>
                     <a href="{{url}}" class="card-button">{{../../settings.view_more_text}}</a>
@@ -311,13 +244,7 @@
                     {{/if}}
                     <div class="card-text">
                       <h3 class="card-title">{{name}}</h3>
-                      {{#if ../settings.card_4_description}}
-                        <p class="card-description">{{../settings.card_4_description}}</p>
-                      {{else}}
-                        {{#if description}}
-                          <p class="card-description">{{excerpt description}}</p>
-                        {{/if}}
-                      {{/if}}
+                      <p class="card-description">{{excerpt description}}</p>
                     </div>
                   </div>
                   <a href="{{url}}" class="card-button">{{../settings.view_more_text}}</a>
@@ -339,13 +266,7 @@
                       {{/if}}
                       <div class="card-text">
                         <h3 class="card-title">{{name}}</h3>
-                        {{#if ../../settings.card_4_description}}
-                          <p class="card-description">{{../../settings.card_4_description}}</p>
-                        {{else}}
-                          {{#if description}}
-                            <p class="card-description">{{excerpt description}}</p>
-                          {{/if}}
-                        {{/if}}
+                        <p class="card-description">{{excerpt description}}</p>
                       </div>
                     </div>
                     <a href="{{url}}" class="card-button">{{../../settings.view_more_text}}</a>
@@ -372,13 +293,7 @@
                     {{/if}}
                     <div class="card-text">
                       <h3 class="card-title">{{name}}</h3>
-                      {{#if ../settings.card_5_description}}
-                        <p class="card-description">{{../settings.card_5_description}}</p>
-                      {{else}}
-                        {{#if description}}
-                          <p class="card-description">{{excerpt description}}</p>
-                        {{/if}}
-                      {{/if}}
+                      <p class="card-description">{{excerpt description}}</p>
                     </div>
                   </div>
                   <a href="{{url}}" class="card-button">{{../settings.view_more_text}}</a>
@@ -400,13 +315,7 @@
                       {{/if}}
                       <div class="card-text">
                         <h3 class="card-title">{{name}}</h3>
-                        {{#if ../../settings.card_5_description}}
-                          <p class="card-description">{{../../settings.card_5_description}}</p>
-                        {{else}}
-                          {{#if description}}
-                            <p class="card-description">{{excerpt description}}</p>
-                          {{/if}}
-                        {{/if}}
+                        <p class="card-description">{{excerpt description}}</p>
                       </div>
                     </div>
                     <a href="{{url}}" class="card-button">{{../../settings.view_more_text}}</a>
@@ -433,13 +342,7 @@
                     {{/if}}
                     <div class="card-text">
                       <h3 class="card-title">{{name}}</h3>
-                      {{#if ../settings.card_6_description}}
-                        <p class="card-description">{{../settings.card_6_description}}</p>
-                      {{else}}
-                        {{#if description}}
-                          <p class="card-description">{{excerpt description}}</p>
-                        {{/if}}
-                      {{/if}}
+                      <p class="card-description">{{excerpt description}}</p>
                     </div>
                   </div>
                   <a href="{{url}}" class="card-button">{{../settings.view_more_text}}</a>
@@ -461,13 +364,7 @@
                       {{/if}}
                       <div class="card-text">
                         <h3 class="card-title">{{name}}</h3>
-                        {{#if ../../settings.card_6_description}}
-                          <p class="card-description">{{../../settings.card_6_description}}</p>
-                        {{else}}
-                          {{#if description}}
-                            <p class="card-description">{{excerpt description}}</p>
-                          {{/if}}
-                        {{/if}}
+                        <p class="card-description">{{excerpt description}}</p>
                       </div>
                     </div>
                     <a href="{{url}}" class="card-button">{{../../settings.view_more_text}}</a>
@@ -494,13 +391,7 @@
                     {{/if}}
                     <div class="card-text">
                       <h3 class="card-title">{{name}}</h3>
-                      {{#if ../settings.card_7_description}}
-                        <p class="card-description">{{../settings.card_7_description}}</p>
-                      {{else}}
-                        {{#if description}}
-                          <p class="card-description">{{excerpt description}}</p>
-                        {{/if}}
-                      {{/if}}
+                      <p class="card-description">{{excerpt description}}</p>
                     </div>
                   </div>
                   <a href="{{url}}" class="card-button">{{../settings.view_more_text}}</a>
@@ -522,13 +413,7 @@
                       {{/if}}
                       <div class="card-text">
                         <h3 class="card-title">{{name}}</h3>
-                        {{#if ../../settings.card_7_description}}
-                          <p class="card-description">{{../../settings.card_7_description}}</p>
-                        {{else}}
-                          {{#if description}}
-                            <p class="card-description">{{excerpt description}}</p>
-                          {{/if}}
-                        {{/if}}
+                        <p class="card-description">{{excerpt description}}</p>
                       </div>
                     </div>
                     <a href="{{url}}" class="card-button">{{../../settings.view_more_text}}</a>
@@ -555,13 +440,7 @@
                     {{/if}}
                     <div class="card-text">
                       <h3 class="card-title">{{name}}</h3>
-                      {{#if ../settings.card_8_description}}
-                        <p class="card-description">{{../settings.card_8_description}}</p>
-                      {{else}}
-                        {{#if description}}
-                          <p class="card-description">{{excerpt description}}</p>
-                        {{/if}}
-                      {{/if}}
+                      <p class="card-description">{{excerpt description}}</p>
                     </div>
                   </div>
                   <a href="{{url}}" class="card-button">{{../settings.view_more_text}}</a>
@@ -583,13 +462,7 @@
                       {{/if}}
                       <div class="card-text">
                         <h3 class="card-title">{{name}}</h3>
-                        {{#if ../../settings.card_8_description}}
-                          <p class="card-description">{{../../settings.card_8_description}}</p>
-                        {{else}}
-                          {{#if description}}
-                            <p class="card-description">{{excerpt description}}</p>
-                          {{/if}}
-                        {{/if}}
+                        <p class="card-description">{{excerpt description}}</p>
                       </div>
                     </div>
                     <a href="{{url}}" class="card-button">{{../../settings.view_more_text}}</a>
@@ -616,13 +489,7 @@
                     {{/if}}
                     <div class="card-text">
                       <h3 class="card-title">{{name}}</h3>
-                      {{#if ../settings.card_9_description}}
-                        <p class="card-description">{{../settings.card_9_description}}</p>
-                      {{else}}
-                        {{#if description}}
-                          <p class="card-description">{{excerpt description}}</p>
-                        {{/if}}
-                      {{/if}}
+                      <p class="card-description">{{excerpt description}}</p>
                     </div>
                   </div>
                   <a href="{{url}}" class="card-button">{{../settings.view_more_text}}</a>
@@ -644,13 +511,7 @@
                       {{/if}}
                       <div class="card-text">
                         <h3 class="card-title">{{name}}</h3>
-                        {{#if ../../settings.card_9_description}}
-                          <p class="card-description">{{../../settings.card_9_description}}</p>
-                        {{else}}
-                          {{#if description}}
-                            <p class="card-description">{{excerpt description}}</p>
-                          {{/if}}
-                        {{/if}}
+                        <p class="card-description">{{excerpt description}}</p>
                       </div>
                     </div>
                     <a href="{{url}}" class="card-button">{{../../settings.view_more_text}}</a>
@@ -677,13 +538,7 @@
                     {{/if}}
                     <div class="card-text">
                       <h3 class="card-title">{{name}}</h3>
-                      {{#if ../settings.card_10_description}}
-                        <p class="card-description">{{../settings.card_10_description}}</p>
-                      {{else}}
-                        {{#if description}}
-                          <p class="card-description">{{excerpt description}}</p>
-                        {{/if}}
-                      {{/if}}
+                      <p class="card-description">{{excerpt description}}</p>
                     </div>
                   </div>
                   <a href="{{url}}" class="card-button">{{../settings.view_more_text}}</a>
@@ -705,13 +560,7 @@
                       {{/if}}
                       <div class="card-text">
                         <h3 class="card-title">{{name}}</h3>
-                        {{#if ../../settings.card_10_description}}
-                          <p class="card-description">{{../../settings.card_10_description}}</p>
-                        {{else}}
-                          {{#if description}}
-                            <p class="card-description">{{excerpt description}}</p>
-                          {{/if}}
-                        {{/if}}
+                        <p class="card-description">{{excerpt description}}</p>
                       </div>
                     </div>
                     <a href="{{url}}" class="card-button">{{../../settings.view_more_text}}</a>
@@ -731,9 +580,7 @@
 <section class="contact-section">
   <div class="container">
     <h2 class="contact-title">{{settings.contact_title}}</h2>
-    {{#if settings.contact_subtitle}}
-      <p class="contact-subtitle">{{settings.contact_subtitle}}</p>
-    {{/if}}
+    <p class="contact-subtitle">{{settings.contact_subtitle}}</p>
     <div class="contact-grid">
       <div class="contact-card">
         <div class="contact-icon">

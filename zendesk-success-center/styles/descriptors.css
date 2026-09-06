@@ -1,64 +1,91 @@
 /* ==========================================================================
    Success Center — descriptors & subheaders
-   Drop-in styles for the Artera theme (Zendesk Guide).
 
-   Append this file to the bottom of the theme's style.css.
-   Everything is namespaced with `jsc-` so it cannot collide with Artera's
-   own classes, and nothing here overrides an existing Artera rule.
+   Append to the bottom of the theme's style.css.
+
+   Only TWO classes here are new (`.hero-subtitle`, `.section-subtitle`) —
+   everything else the templates emit (`.blocks-item-description`,
+   `.card-description`, `.contact-subtitle`) is already styled by Artera, so
+   this file deliberately leaves those alone apart from a couple of safety
+   rules. Colours are inherited rather than hardcoded, so the subheaders track
+   whatever the theme's hero and section background colours are set to.
    ========================================================================== */
 
 :root {
-  /* Descriptor = the short line of copy under a card / page title. */
-  --jsc-descriptor-color: #52596b;
-  --jsc-descriptor-size: 0.875rem;   /* 14px */
-  --jsc-descriptor-leading: 1.45;
-  --jsc-descriptor-gap: 0.375rem;    /* space between title and descriptor */
-  --jsc-descriptor-clamp: 3;         /* max lines on a card before ellipsis */
-
-  /* Subheader = the supporting line under a section heading (H2). */
-  --jsc-subheader-color: #52596b;
-  --jsc-subheader-size: 1rem;        /* 16px */
-  --jsc-subheader-leading: 1.5;
-  --jsc-subheader-gap: 0.5rem;
-  --jsc-subheader-max-width: 44rem;
-
-  /* Page descriptor = category/section description at the top of a page. */
-  --jsc-page-descriptor-size: 1.0625rem; /* 17px */
+  --jsc-hero-subtitle-size: 1.0625rem;   /* 17px */
+  --jsc-section-subtitle-size: 1rem;     /* 16px */
+  --jsc-subtitle-max-width: 44rem;
+  --jsc-descriptor-clamp: 3;             /* max lines before ellipsis */
 }
 
 /* --------------------------------------------------------------------------
-   1. Descriptors
+   1. Hero subheader — under the H1, above the search box
    -------------------------------------------------------------------------- */
 
-.jsc-descriptor {
-  display: block;
-  margin: var(--jsc-descriptor-gap) 0 0;
-  color: var(--jsc-descriptor-color);
-  font-size: var(--jsc-descriptor-size);
+.hero-subtitle {
+  max-width: var(--jsc-subtitle-max-width);
+  margin: 0 auto 1.25rem;
+  padding: 0 1.5rem;
+  color: inherit;      /* white on the hero background */
+  opacity: 0.9;
+  font-size: var(--jsc-hero-subtitle-size);
   font-weight: 400;
-  line-height: var(--jsc-descriptor-leading);
-  text-transform: none;
-  letter-spacing: normal;
+  line-height: 1.5;
+  text-align: center;
 }
 
-/* Descriptors sit inside a card link in most Artera blocks. Make sure they
-   never inherit the link's colour, underline or weight. */
-a .jsc-descriptor,
-a:hover .jsc-descriptor,
-a:focus .jsc-descriptor {
-  color: var(--jsc-descriptor-color);
-  text-decoration: none;
+/* --------------------------------------------------------------------------
+   2. Section subheader — under "Your Learning Path with Jasper"
+   -------------------------------------------------------------------------- */
+
+.section-subtitle {
+  max-width: var(--jsc-subtitle-max-width);
+  margin: 0.5rem auto 2rem;
+  color: inherit;      /* tracks settings.ttk_background_color */
+  opacity: 0.75;
+  font-size: var(--jsc-section-subtitle-size);
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: center;
 }
 
-/* A description Zendesk returned as an empty string still renders an element.
-   Collapse it so cards without copy keep their original spacing. */
-.jsc-descriptor:empty {
+/* The section title carries the gap to the grid by default. With a subtitle
+   between them, hand that spacing to the subtitle instead. */
+.things-to-know-section .section-title:has(+ .section-subtitle) {
+  margin-bottom: 0;
+}
+
+/* Fallback for browsers without :has() — harmless where :has() applies. */
+.section-subtitle {
+  margin-top: 0.5rem;
+}
+
+/* --------------------------------------------------------------------------
+   3. Safety rules for the descriptors the templates now emit
+   -------------------------------------------------------------------------- */
+
+/* The templates suppress empty descriptors, but a description that is nothing
+   but whitespace in Guide would still slip through. Collapse it. */
+.blocks-item-description:empty,
+.card-description:empty,
+.contact-subtitle:empty,
+.hero-subtitle:empty,
+.section-subtitle:empty {
   display: none;
 }
 
-/* Card variant: clamp to a fixed number of lines so a long category
-   description can't blow out the height of a card grid. */
-.jsc-descriptor--card {
+/* Descriptors sit inside the card link in the categories block — stop them
+   inheriting the link colour and underline. */
+.blocks-item-link .blocks-item-description,
+.blocks-item-link:hover .blocks-item-description,
+.blocks-item-link:focus .blocks-item-description {
+  text-decoration: none;
+}
+
+/* Clamp long Guide descriptions so one verbose category can't set the height
+   of every card in the row. */
+.blocks-item-description,
+.things-to-know-card .card-description {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: var(--jsc-descriptor-clamp);
@@ -66,79 +93,16 @@ a:focus .jsc-descriptor {
   overflow: hidden;
 }
 
-/* Page variant: the full category/section description under an H1. */
-.jsc-descriptor--page {
-  max-width: var(--jsc-subheader-max-width);
-  margin-top: 0.75rem;
-  font-size: var(--jsc-page-descriptor-size);
-  line-height: 1.55;
-  -webkit-line-clamp: none;
-  line-clamp: none;
-  overflow: visible;
-  display: block;
-}
-
-/* List variant: descriptor under a section name in a category page list. */
-.jsc-descriptor--list {
-  margin-top: 0.25rem;
-  font-size: 0.8125rem; /* 13px */
-}
-
-/* --------------------------------------------------------------------------
-   2. Subheaders
-   -------------------------------------------------------------------------- */
-
-.jsc-subheader {
-  display: block;
-  margin: var(--jsc-subheader-gap) auto 0;
-  max-width: var(--jsc-subheader-max-width);
-  color: var(--jsc-subheader-color);
-  font-size: var(--jsc-subheader-size);
-  font-weight: 400;
-  line-height: var(--jsc-subheader-leading);
-}
-
-.jsc-subheader:empty {
-  display: none;
-}
-
-/* Artera centres its section headings on the home page; a subheader that
-   follows a centred heading should inherit that alignment. */
-.jsc-subheader--centered {
-  text-align: center;
-}
-
-.jsc-subheader--left {
-  margin-left: 0;
-  margin-right: 0;
-  text-align: left;
-}
-
-/* Tighten the gap the theme leaves under a heading when a subheader is
-   inserted between the heading and the block content. */
-.jsc-has-subheader {
-  margin-bottom: 0;
-}
-
-/* --------------------------------------------------------------------------
-   3. Card layout support (optional)
-   Uncomment if adding descriptors makes cards in a row uneven. It pins the
-   CTA/footer of each card to the bottom regardless of descriptor length.
-   Replace `.blocks-item` with Artera's card class if it differs.
-   -------------------------------------------------------------------------- */
-
-/*
-.blocks-item,
-.blocks-item-link {
+/* Keep the View More button pinned to the bottom of each card, so cards with
+   a one-line descriptor line up with cards that have three. */
+.things-to-know-card {
   display: flex;
   flex-direction: column;
-  height: 100%;
 }
 
-.blocks-item .jsc-descriptor {
+.things-to-know-card .card-content {
   flex: 1 1 auto;
 }
-*/
 
 /* --------------------------------------------------------------------------
    4. Small screens
@@ -147,17 +111,11 @@ a:focus .jsc-descriptor {
 @media (max-width: 768px) {
   :root {
     --jsc-descriptor-clamp: 2;
-    --jsc-subheader-size: 0.9375rem; /* 15px */
+    --jsc-hero-subtitle-size: 0.9375rem; /* 15px */
+    --jsc-section-subtitle-size: 0.9375rem;
   }
-}
 
-/* --------------------------------------------------------------------------
-   5. Motion / contrast preferences
-   -------------------------------------------------------------------------- */
-
-@media (prefers-contrast: more) {
-  :root {
-    --jsc-descriptor-color: #2b3040;
-    --jsc-subheader-color: #2b3040;
+  .section-subtitle {
+    margin-bottom: 1.5rem;
   }
 }

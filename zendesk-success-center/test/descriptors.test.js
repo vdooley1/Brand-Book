@@ -48,6 +48,9 @@ const HTML = `<!DOCTYPE html><html lang="en-us"><body>
     </li>
   </ul>
 
+  <h2 class="blocks-title">Need more help?</h2>
+  <p class="contact-subtitle">Already rendered by the template</p>
+
   <h2 class="blocks-title">More Resources</h2>
   <ul class="blocks-list">
     <li class="blocks-item">
@@ -119,7 +122,11 @@ setTimeout(() => {
     'Live sessions, product stories, and the latest from our team'
   );
   check('heading got .jsc-has-subheader', doc.querySelector('h2').classList.contains('jsc-has-subheader'), true);
-  check('subheader count is 2', doc.querySelectorAll('.jsc-subheader').length, 2);
+  check(
+    'no duplicate subheader where the template already rendered one',
+    doc.querySelectorAll('.jsc-subheader').length,
+    2
+  );
 
   console.log('--- API passes ---');
   check('fetched 2 endpoints', fetched.length, 2);

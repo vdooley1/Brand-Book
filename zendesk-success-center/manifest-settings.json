@@ -1,146 +1,124 @@
 {
   "_comment": [
-    "Merge the object below into the `settings` array in the Artera theme's manifest.json.",
-    "It appears as its own group in Guide > Customize design, so the content team can",
-    "edit subheaders and resource-card copy without a theme deploy.",
-    "Zendesk supports these variable types: text, checkbox, range, list, color, file.",
-    "There is no multi-line type — keep copy to one line.",
+    "Merge this object into the `settings` array in the Artera theme manifest.json.",
+    "It appears as its own group in Guide > Customize design.",
+    "Zendesk settings types: text, checkbox, range, list, color, file. There is no",
+    "multi-line type, so keep each value to a single line.",
     "Remove this _comment key before pasting."
   ],
-
   "label": "Descriptors & subheaders",
   "variables": [
     {
-      "identifier": "show_category_descriptions",
-      "type": "checkbox",
-      "label": "Show category descriptions",
-      "description": "Print the description from Guide > Arrange content under each category card.",
-      "value": true
+      "identifier": "homepage_welcome_subtitle",
+      "type": "text",
+      "label": "Hero subheader",
+      "description": "Supporting line under the hero title, above the search box. Leave blank to hide.",
+      "value": "Everything you need to get set up, get comfortable, and get the most out of Jasper"
     },
     {
-      "identifier": "show_section_descriptions",
-      "type": "checkbox",
-      "label": "Show section descriptions",
-      "description": "Print the section description as a subheader on category pages.",
-      "value": true
-    },
-    {
-      "identifier": "show_article_snippets",
-      "type": "checkbox",
-      "label": "Show article snippets",
-      "description": "Print the first ~100 characters of each article under its title in article lists.",
-      "value": false
-    },
-
-    {
-      "identifier": "learning_path_subheader",
+      "identifier": "things_to_know_subtitle",
       "type": "text",
       "label": "Learning path subheader",
-      "description": "Supporting line under the 'Your Learning Path' heading on the home page.",
+      "description": "Supporting line under the Things to Know section title. Leave blank to hide.",
       "value": "Follow this path from your first login to mastering Jasper's full toolkit"
     },
-
     {
-      "identifier": "more_resources_heading",
+      "identifier": "category_1_description",
       "type": "text",
-      "label": "More resources: heading",
-      "description": "Leave blank to hide the entire More Resources block.",
-      "value": "More Resources"
+      "label": "Category 1: descriptor",
+      "description": "Overrides the category description from Guide on the home page only. Leave blank to use the Guide description.",
+      "value": ""
     },
     {
-      "identifier": "more_resources_subheader",
+      "identifier": "category_2_description",
       "type": "text",
-      "label": "More resources: subheader",
-      "description": "Supporting line under the More Resources heading.",
-      "value": "Live sessions, product stories, and the latest from our team"
-    },
-
-    {
-      "identifier": "resource_1_title",
-      "type": "text",
-      "label": "Resource 1: title",
-      "description": "Leave blank to hide this card.",
-      "value": "Live Training Sessions"
+      "label": "Category 2: descriptor",
+      "description": "Overrides the category description from Guide on the home page only. Leave blank to use the Guide description.",
+      "value": ""
     },
     {
-      "identifier": "resource_1_description",
+      "identifier": "category_3_description",
       "type": "text",
-      "label": "Resource 1: descriptor",
-      "description": "One line of supporting copy under the card title.",
-      "value": "Hands-on how-to sessions with our Customer Success team"
+      "label": "Category 3: descriptor",
+      "description": "Overrides the category description from Guide on the home page only. Leave blank to use the Guide description.",
+      "value": ""
     },
     {
-      "identifier": "resource_1_url",
+      "identifier": "category_4_description",
       "type": "text",
-      "label": "Resource 1: link",
-      "description": "Full URL or a Help Center relative path.",
-      "value": "#"
-    },
-
-    {
-      "identifier": "resource_2_title",
-      "type": "text",
-      "label": "Resource 2: title",
-      "description": "Leave blank to hide this card.",
-      "value": "Jasper Courses"
+      "label": "Category 4: descriptor",
+      "description": "Overrides the category description from Guide on the home page only. Leave blank to use the Guide description.",
+      "value": ""
     },
     {
-      "identifier": "resource_2_description",
+      "identifier": "card_1_description",
       "type": "text",
-      "label": "Resource 2: descriptor",
-      "description": "One line of supporting copy under the card title.",
-      "value": "Self-paced Foundations and Jasper Grid courses"
+      "label": "Card 1: descriptor",
+      "description": "Overrides the category/section description from Guide on this card only. Leave blank to use the Guide description.",
+      "value": ""
     },
     {
-      "identifier": "resource_2_url",
+      "identifier": "card_2_description",
       "type": "text",
-      "label": "Resource 2: link",
-      "description": "Full URL or a Help Center relative path.",
-      "value": "#"
-    },
-
-    {
-      "identifier": "resource_3_title",
-      "type": "text",
-      "label": "Resource 3: title",
-      "description": "Leave blank to hide this card.",
-      "value": "Customer Stories"
+      "label": "Card 2: descriptor",
+      "description": "Overrides the category/section description from Guide on this card only. Leave blank to use the Guide description.",
+      "value": ""
     },
     {
-      "identifier": "resource_3_description",
+      "identifier": "card_3_description",
       "type": "text",
-      "label": "Resource 3: descriptor",
-      "description": "One line of supporting copy under the card title.",
-      "value": "See how other teams use Jasper"
+      "label": "Card 3: descriptor",
+      "description": "Overrides the category/section description from Guide on this card only. Leave blank to use the Guide description.",
+      "value": ""
     },
     {
-      "identifier": "resource_3_url",
+      "identifier": "card_4_description",
       "type": "text",
-      "label": "Resource 3: link",
-      "description": "Full URL or a Help Center relative path.",
-      "value": "#"
-    },
-
-    {
-      "identifier": "resource_4_title",
-      "type": "text",
-      "label": "Resource 4: title",
-      "description": "Leave blank to hide this card.",
-      "value": "Jasper Blog"
+      "label": "Card 4: descriptor",
+      "description": "Overrides the category/section description from Guide on this card only. Leave blank to use the Guide description.",
+      "value": ""
     },
     {
-      "identifier": "resource_4_description",
+      "identifier": "card_5_description",
       "type": "text",
-      "label": "Resource 4: descriptor",
-      "description": "One line of supporting copy under the card title.",
-      "value": "Tips and product news from our team"
+      "label": "Card 5: descriptor",
+      "description": "Overrides the category/section description from Guide on this card only. Leave blank to use the Guide description.",
+      "value": ""
     },
     {
-      "identifier": "resource_4_url",
+      "identifier": "card_6_description",
       "type": "text",
-      "label": "Resource 4: link",
-      "description": "Full URL or a Help Center relative path.",
-      "value": "#"
+      "label": "Card 6: descriptor",
+      "description": "Overrides the category/section description from Guide on this card only. Leave blank to use the Guide description.",
+      "value": ""
+    },
+    {
+      "identifier": "card_7_description",
+      "type": "text",
+      "label": "Card 7: descriptor",
+      "description": "Overrides the category/section description from Guide on this card only. Leave blank to use the Guide description.",
+      "value": ""
+    },
+    {
+      "identifier": "card_8_description",
+      "type": "text",
+      "label": "Card 8: descriptor",
+      "description": "Overrides the category/section description from Guide on this card only. Leave blank to use the Guide description.",
+      "value": ""
+    },
+    {
+      "identifier": "card_9_description",
+      "type": "text",
+      "label": "Card 9: descriptor",
+      "description": "Overrides the category/section description from Guide on this card only. Leave blank to use the Guide description.",
+      "value": ""
+    },
+    {
+      "identifier": "card_10_description",
+      "type": "text",
+      "label": "Card 10: descriptor",
+      "description": "Overrides the category/section description from Guide on this card only. Leave blank to use the Guide description.",
+      "value": ""
     }
   ]
 }
