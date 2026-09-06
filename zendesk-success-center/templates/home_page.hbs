@@ -1,0 +1,130 @@
+{{!--
+  home_page.hbs — descriptor & subheader snippets
+
+  These are PATCHES, not a replacement template. Artera's home_page.hbs already
+  contains its own hero, blocks and promoted-articles markup. Copy the marked
+  snippets into the matching spots in the theme's file.
+
+  Zendesk data available on this template:
+    categories            — array of the visible categories
+    category.name         — string
+    category.description  — string (plain text, set in Guide > Arrange content)
+    category.url          — string
+    category.sections     — array
+--}}
+
+
+{{!-- ------------------------------------------------------------------
+  SNIPPET 1 — Descriptor on each category card.
+
+  Find Artera's category loop in home_page.hbs. It looks roughly like:
+
+      {{#each categories}}
+        <li class="blocks-item">
+          <a href="{{url}}" class="blocks-item-link">
+            <span class="blocks-item-title">{{name}}</span>
+          </a>
+        </li>
+      {{/each}}
+
+  Paste the block below directly AFTER the element that renders {{name}},
+  still inside the loop.
+------------------------------------------------------------------- --}}
+
+{{#if description}}
+  <span class="jsc-descriptor jsc-descriptor--card">{{description}}</span>
+{{/if}}
+
+
+{{!-- ------------------------------------------------------------------
+  SNIPPET 1b — Same thing, but gated behind a theme setting so the copy can be
+  switched off from Guide > Customize design without editing code.
+  Requires the `show_category_descriptions` setting from manifest-settings.json.
+------------------------------------------------------------------- --}}
+
+{{#if settings.show_category_descriptions}}
+  {{#if description}}
+    <span class="jsc-descriptor jsc-descriptor--card">{{description}}</span>
+  {{/if}}
+{{/if}}
+
+
+{{!-- ------------------------------------------------------------------
+  SNIPPET 2 — Subheader under a home page section heading.
+
+  Artera renders section headings as something like:
+
+      <h2 class="blocks-title">{{t 'categories'}}</h2>
+
+  Add the `jsc-has-subheader` class to that heading and paste this line
+  immediately after it. The copy comes from a theme setting so the content
+  team can edit it without a theme deploy.
+------------------------------------------------------------------- --}}
+
+{{#if settings.learning_path_subheader}}
+  <p class="jsc-subheader jsc-subheader--centered">{{settings.learning_path_subheader}}</p>
+{{/if}}
+
+
+{{!-- ------------------------------------------------------------------
+  SNIPPET 3 — A full "More Resources" block for cards that are NOT backed by a
+  Zendesk category (Live Training Sessions, Courses, Customer Stories, Blog).
+  These have no category record, so both title and descriptor come from theme
+  settings. Drop this anywhere in home_page.hbs; add/remove card blocks to
+  match how many links you need.
+------------------------------------------------------------------- --}}
+
+{{#if settings.more_resources_heading}}
+  <section class="jsc-block">
+    <h2 class="blocks-title jsc-has-subheader">{{settings.more_resources_heading}}</h2>
+    {{#if settings.more_resources_subheader}}
+      <p class="jsc-subheader jsc-subheader--centered">{{settings.more_resources_subheader}}</p>
+    {{/if}}
+
+    <ul class="blocks-list">
+      {{#if settings.resource_1_title}}
+        <li class="blocks-item">
+          <a href="{{settings.resource_1_url}}" class="blocks-item-link">
+            <span class="blocks-item-title">{{settings.resource_1_title}}</span>
+            {{#if settings.resource_1_description}}
+              <span class="jsc-descriptor jsc-descriptor--card">{{settings.resource_1_description}}</span>
+            {{/if}}
+          </a>
+        </li>
+      {{/if}}
+
+      {{#if settings.resource_2_title}}
+        <li class="blocks-item">
+          <a href="{{settings.resource_2_url}}" class="blocks-item-link">
+            <span class="blocks-item-title">{{settings.resource_2_title}}</span>
+            {{#if settings.resource_2_description}}
+              <span class="jsc-descriptor jsc-descriptor--card">{{settings.resource_2_description}}</span>
+            {{/if}}
+          </a>
+        </li>
+      {{/if}}
+
+      {{#if settings.resource_3_title}}
+        <li class="blocks-item">
+          <a href="{{settings.resource_3_url}}" class="blocks-item-link">
+            <span class="blocks-item-title">{{settings.resource_3_title}}</span>
+            {{#if settings.resource_3_description}}
+              <span class="jsc-descriptor jsc-descriptor--card">{{settings.resource_3_description}}</span>
+            {{/if}}
+          </a>
+        </li>
+      {{/if}}
+
+      {{#if settings.resource_4_title}}
+        <li class="blocks-item">
+          <a href="{{settings.resource_4_url}}" class="blocks-item-link">
+            <span class="blocks-item-title">{{settings.resource_4_title}}</span>
+            {{#if settings.resource_4_description}}
+              <span class="jsc-descriptor jsc-descriptor--card">{{settings.resource_4_description}}</span>
+            {{/if}}
+          </a>
+        </li>
+      {{/if}}
+    </ul>
+  </section>
+{{/if}}

@@ -1,0 +1,83 @@
+{{!--
+  category_page.hbs — descriptor & subheader snippets
+
+  PATCHES for Artera's category_page.hbs.
+
+  Zendesk data available on this template:
+    category.name          — string
+    category.description   — string (Guide > Arrange content > edit category)
+    category.sections      — array
+      section.name         — string
+      section.description  — string (Guide > Arrange content > edit section)
+      section.url          — string
+      section.articles     — array
+--}}
+
+
+{{!-- ------------------------------------------------------------------
+  SNIPPET 1 — Category description under the page H1.
+
+  Artera renders the page title as something like:
+
+      <h1 class="page-header-title">{{category.name}}</h1>
+
+  Paste this immediately after that H1. Artera may already print
+  {{category.description}} here — if it does, skip this snippet and just add
+  the `jsc-descriptor jsc-descriptor--page` classes to the existing element so
+  it picks up the shared styling.
+------------------------------------------------------------------- --}}
+
+{{#if category.description}}
+  <p class="jsc-descriptor jsc-descriptor--page">{{category.description}}</p>
+{{/if}}
+
+
+{{!-- ------------------------------------------------------------------
+  SNIPPET 2 — Section descriptor as a subheader inside the section list.
+
+  Artera's section loop looks roughly like:
+
+      {{#each category.sections}}
+        <section class="section-tree-item">
+          <h2 class="section-tree-title">
+            <a href="{{url}}">{{name}}</a>
+          </h2>
+          <ul class="article-list">...</ul>
+        </section>
+      {{/each}}
+
+  Paste this directly after the <h2> that renders {{name}}, still inside the
+  loop, and add `jsc-has-subheader` to that <h2>.
+------------------------------------------------------------------- --}}
+
+{{#if description}}
+  <p class="jsc-subheader jsc-subheader--left">{{description}}</p>
+{{/if}}
+
+
+{{!-- ------------------------------------------------------------------
+  SNIPPET 2b — Same, gated behind the `show_section_descriptions` setting.
+------------------------------------------------------------------- --}}
+
+{{#if settings.show_section_descriptions}}
+  {{#if description}}
+    <p class="jsc-subheader jsc-subheader--left">{{description}}</p>
+  {{/if}}
+{{/if}}
+
+
+{{!-- ------------------------------------------------------------------
+  SNIPPET 3 — If the theme renders sections as CARDS rather than as a list,
+  use the compact card descriptor instead so long copy gets clamped.
+------------------------------------------------------------------- --}}
+
+{{#each category.sections}}
+  <li class="blocks-item">
+    <a href="{{url}}" class="blocks-item-link">
+      <span class="blocks-item-title">{{name}}</span>
+      {{#if description}}
+        <span class="jsc-descriptor jsc-descriptor--card">{{description}}</span>
+      {{/if}}
+    </a>
+  </li>
+{{/each}}

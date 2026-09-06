@@ -1,0 +1,59 @@
+{{!--
+  section_page.hbs — descriptor & subheader snippets
+
+  PATCHES for Artera's section_page.hbs.
+
+  Zendesk data available on this template:
+    section.name          — string
+    section.description   — string
+    section.articles      — array
+    section.sections      — array of subsections (only when the Help Center
+                            plan has multi-level sections enabled)
+--}}
+
+
+{{!-- ------------------------------------------------------------------
+  SNIPPET 1 — Section description under the page H1.
+  Paste immediately after <h1 class="page-header-title">{{section.name}}</h1>.
+------------------------------------------------------------------- --}}
+
+{{#if section.description}}
+  <p class="jsc-descriptor jsc-descriptor--page">{{section.description}}</p>
+{{/if}}
+
+
+{{!-- ------------------------------------------------------------------
+  SNIPPET 2 — Descriptors on subsections, when multi-level sections are on.
+  Paste after the element that renders each subsection's {{name}}.
+------------------------------------------------------------------- --}}
+
+{{#each section.sections}}
+  <li class="section-list-item">
+    <a href="{{url}}" class="section-list-link">
+      <span class="section-list-title">{{name}}</span>
+      {{#if description}}
+        <span class="jsc-descriptor jsc-descriptor--list">{{description}}</span>
+      {{/if}}
+    </a>
+  </li>
+{{/each}}
+
+
+{{!-- ------------------------------------------------------------------
+  SNIPPET 3 — Article snippets as descriptors in the article list.
+
+  `snippet` is the first ~100 characters of the article body. It is only
+  useful when articles are written with a strong opening sentence — review the
+  output before shipping this one.
+------------------------------------------------------------------- --}}
+
+{{#each articles}}
+  <li class="article-list-item">
+    <a href="{{url}}" class="article-list-link">{{title}}</a>
+    {{#if settings.show_article_snippets}}
+      {{#if snippet}}
+        <span class="jsc-descriptor jsc-descriptor--list">{{snippet}}</span>
+      {{/if}}
+    {{/if}}
+  </li>
+{{/each}}

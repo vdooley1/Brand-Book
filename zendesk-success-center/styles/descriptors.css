@@ -1,0 +1,163 @@
+/* ==========================================================================
+   Success Center — descriptors & subheaders
+   Drop-in styles for the Artera theme (Zendesk Guide).
+
+   Append this file to the bottom of the theme's style.css.
+   Everything is namespaced with `jsc-` so it cannot collide with Artera's
+   own classes, and nothing here overrides an existing Artera rule.
+   ========================================================================== */
+
+:root {
+  /* Descriptor = the short line of copy under a card / page title. */
+  --jsc-descriptor-color: #52596b;
+  --jsc-descriptor-size: 0.875rem;   /* 14px */
+  --jsc-descriptor-leading: 1.45;
+  --jsc-descriptor-gap: 0.375rem;    /* space between title and descriptor */
+  --jsc-descriptor-clamp: 3;         /* max lines on a card before ellipsis */
+
+  /* Subheader = the supporting line under a section heading (H2). */
+  --jsc-subheader-color: #52596b;
+  --jsc-subheader-size: 1rem;        /* 16px */
+  --jsc-subheader-leading: 1.5;
+  --jsc-subheader-gap: 0.5rem;
+  --jsc-subheader-max-width: 44rem;
+
+  /* Page descriptor = category/section description at the top of a page. */
+  --jsc-page-descriptor-size: 1.0625rem; /* 17px */
+}
+
+/* --------------------------------------------------------------------------
+   1. Descriptors
+   -------------------------------------------------------------------------- */
+
+.jsc-descriptor {
+  display: block;
+  margin: var(--jsc-descriptor-gap) 0 0;
+  color: var(--jsc-descriptor-color);
+  font-size: var(--jsc-descriptor-size);
+  font-weight: 400;
+  line-height: var(--jsc-descriptor-leading);
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+/* Descriptors sit inside a card link in most Artera blocks. Make sure they
+   never inherit the link's colour, underline or weight. */
+a .jsc-descriptor,
+a:hover .jsc-descriptor,
+a:focus .jsc-descriptor {
+  color: var(--jsc-descriptor-color);
+  text-decoration: none;
+}
+
+/* A description Zendesk returned as an empty string still renders an element.
+   Collapse it so cards without copy keep their original spacing. */
+.jsc-descriptor:empty {
+  display: none;
+}
+
+/* Card variant: clamp to a fixed number of lines so a long category
+   description can't blow out the height of a card grid. */
+.jsc-descriptor--card {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: var(--jsc-descriptor-clamp);
+  line-clamp: var(--jsc-descriptor-clamp);
+  overflow: hidden;
+}
+
+/* Page variant: the full category/section description under an H1. */
+.jsc-descriptor--page {
+  max-width: var(--jsc-subheader-max-width);
+  margin-top: 0.75rem;
+  font-size: var(--jsc-page-descriptor-size);
+  line-height: 1.55;
+  -webkit-line-clamp: none;
+  line-clamp: none;
+  overflow: visible;
+  display: block;
+}
+
+/* List variant: descriptor under a section name in a category page list. */
+.jsc-descriptor--list {
+  margin-top: 0.25rem;
+  font-size: 0.8125rem; /* 13px */
+}
+
+/* --------------------------------------------------------------------------
+   2. Subheaders
+   -------------------------------------------------------------------------- */
+
+.jsc-subheader {
+  display: block;
+  margin: var(--jsc-subheader-gap) auto 0;
+  max-width: var(--jsc-subheader-max-width);
+  color: var(--jsc-subheader-color);
+  font-size: var(--jsc-subheader-size);
+  font-weight: 400;
+  line-height: var(--jsc-subheader-leading);
+}
+
+.jsc-subheader:empty {
+  display: none;
+}
+
+/* Artera centres its section headings on the home page; a subheader that
+   follows a centred heading should inherit that alignment. */
+.jsc-subheader--centered {
+  text-align: center;
+}
+
+.jsc-subheader--left {
+  margin-left: 0;
+  margin-right: 0;
+  text-align: left;
+}
+
+/* Tighten the gap the theme leaves under a heading when a subheader is
+   inserted between the heading and the block content. */
+.jsc-has-subheader {
+  margin-bottom: 0;
+}
+
+/* --------------------------------------------------------------------------
+   3. Card layout support (optional)
+   Uncomment if adding descriptors makes cards in a row uneven. It pins the
+   CTA/footer of each card to the bottom regardless of descriptor length.
+   Replace `.blocks-item` with Artera's card class if it differs.
+   -------------------------------------------------------------------------- */
+
+/*
+.blocks-item,
+.blocks-item-link {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.blocks-item .jsc-descriptor {
+  flex: 1 1 auto;
+}
+*/
+
+/* --------------------------------------------------------------------------
+   4. Small screens
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 768px) {
+  :root {
+    --jsc-descriptor-clamp: 2;
+    --jsc-subheader-size: 0.9375rem; /* 15px */
+  }
+}
+
+/* --------------------------------------------------------------------------
+   5. Motion / contrast preferences
+   -------------------------------------------------------------------------- */
+
+@media (prefers-contrast: more) {
+  :root {
+    --jsc-descriptor-color: #2b3040;
+    --jsc-subheader-color: #2b3040;
+  }
+}

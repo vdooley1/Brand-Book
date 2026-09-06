@@ -1,0 +1,146 @@
+{
+  "_comment": [
+    "Merge the object below into the `settings` array in the Artera theme's manifest.json.",
+    "It appears as its own group in Guide > Customize design, so the content team can",
+    "edit subheaders and resource-card copy without a theme deploy.",
+    "Zendesk supports these variable types: text, checkbox, range, list, color, file.",
+    "There is no multi-line type — keep copy to one line.",
+    "Remove this _comment key before pasting."
+  ],
+
+  "label": "Descriptors & subheaders",
+  "variables": [
+    {
+      "identifier": "show_category_descriptions",
+      "type": "checkbox",
+      "label": "Show category descriptions",
+      "description": "Print the description from Guide > Arrange content under each category card.",
+      "value": true
+    },
+    {
+      "identifier": "show_section_descriptions",
+      "type": "checkbox",
+      "label": "Show section descriptions",
+      "description": "Print the section description as a subheader on category pages.",
+      "value": true
+    },
+    {
+      "identifier": "show_article_snippets",
+      "type": "checkbox",
+      "label": "Show article snippets",
+      "description": "Print the first ~100 characters of each article under its title in article lists.",
+      "value": false
+    },
+
+    {
+      "identifier": "learning_path_subheader",
+      "type": "text",
+      "label": "Learning path subheader",
+      "description": "Supporting line under the 'Your Learning Path' heading on the home page.",
+      "value": "Follow this path from your first login to mastering Jasper's full toolkit"
+    },
+
+    {
+      "identifier": "more_resources_heading",
+      "type": "text",
+      "label": "More resources: heading",
+      "description": "Leave blank to hide the entire More Resources block.",
+      "value": "More Resources"
+    },
+    {
+      "identifier": "more_resources_subheader",
+      "type": "text",
+      "label": "More resources: subheader",
+      "description": "Supporting line under the More Resources heading.",
+      "value": "Live sessions, product stories, and the latest from our team"
+    },
+
+    {
+      "identifier": "resource_1_title",
+      "type": "text",
+      "label": "Resource 1: title",
+      "description": "Leave blank to hide this card.",
+      "value": "Live Training Sessions"
+    },
+    {
+      "identifier": "resource_1_description",
+      "type": "text",
+      "label": "Resource 1: descriptor",
+      "description": "One line of supporting copy under the card title.",
+      "value": "Hands-on how-to sessions with our Customer Success team"
+    },
+    {
+      "identifier": "resource_1_url",
+      "type": "text",
+      "label": "Resource 1: link",
+      "description": "Full URL or a Help Center relative path.",
+      "value": "#"
+    },
+
+    {
+      "identifier": "resource_2_title",
+      "type": "text",
+      "label": "Resource 2: title",
+      "description": "Leave blank to hide this card.",
+      "value": "Jasper Courses"
+    },
+    {
+      "identifier": "resource_2_description",
+      "type": "text",
+      "label": "Resource 2: descriptor",
+      "description": "One line of supporting copy under the card title.",
+      "value": "Self-paced Foundations and Jasper Grid courses"
+    },
+    {
+      "identifier": "resource_2_url",
+      "type": "text",
+      "label": "Resource 2: link",
+      "description": "Full URL or a Help Center relative path.",
+      "value": "#"
+    },
+
+    {
+      "identifier": "resource_3_title",
+      "type": "text",
+      "label": "Resource 3: title",
+      "description": "Leave blank to hide this card.",
+      "value": "Customer Stories"
+    },
+    {
+      "identifier": "resource_3_description",
+      "type": "text",
+      "label": "Resource 3: descriptor",
+      "description": "One line of supporting copy under the card title.",
+      "value": "See how other teams use Jasper"
+    },
+    {
+      "identifier": "resource_3_url",
+      "type": "text",
+      "label": "Resource 3: link",
+      "description": "Full URL or a Help Center relative path.",
+      "value": "#"
+    },
+
+    {
+      "identifier": "resource_4_title",
+      "type": "text",
+      "label": "Resource 4: title",
+      "description": "Leave blank to hide this card.",
+      "value": "Jasper Blog"
+    },
+    {
+      "identifier": "resource_4_description",
+      "type": "text",
+      "label": "Resource 4: descriptor",
+      "description": "One line of supporting copy under the card title.",
+      "value": "Tips and product news from our team"
+    },
+    {
+      "identifier": "resource_4_url",
+      "type": "text",
+      "label": "Resource 4: link",
+      "description": "Full URL or a Help Center relative path.",
+      "value": "#"
+    }
+  ]
+}
